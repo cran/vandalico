@@ -27,11 +27,12 @@
 CALplot <- function(mat, by = 0.1) {
     bins <- cut(mat[, 1], seq(0, 1, by), include.lowest = T, right = F)
     tableBins <- table(mat[, 2], bins)
-    prevalBins <- as.matrix(tableBins[2, ]/colSums(tableBins))
+    prevalBins <- as.matrix(tableBins[2, ] / colSums(tableBins))
     prevalBins.2 <- as.matrix(tapply(mat[, 1], bins, mean))
     colDots <- ifelse(colSums(tableBins) < 14, 21, 19)
-    plot(prevalBins.2, prevalBins, main = "Calibration plot", pch = colDots, ylab = "observed probability", xlab = "predicted probability", 
-        xlim = c(0, 1), ylim = c(0, 1), yaxt = "n", cex.lab = 1.3, cex = 1.1)
+    plot(prevalBins.2, prevalBins, main = "Calibration plot", pch = colDots, ylab = "observed probability",
+        xlab = "predicted probability", xlim = c(0, 1), ylim = c(0, 1), yaxt = "n", cex.lab = 1.3,
+        cex = 1.1)
     axis(side = 2, las = 2, mgp = c(3, 0.75, 0))
     abline(a = 0, b = 1, col = "black", lty = 2)
 }

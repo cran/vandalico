@@ -93,5 +93,5 @@ Bamber, D. (1975). The Area above the Ordinal Dominance Graph and
 
     Jiménez-Valverde, A. (2022). The uniform AUC: dealing with the
     representativeness effect in presence-absence models. \emph{Methods Ecol.
-    Evol.}, accepted on 28 January 2022.
+    Evol.}, 13, 1224-1236.
 }
