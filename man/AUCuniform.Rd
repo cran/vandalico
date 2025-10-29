@@ -77,11 +77,11 @@ point that minimizes the absolute difference between sensitivity and
 specificity and by doing the mean of those values (Jiménez-Valverde 2020).
 }
 \examples{
-suit<-rbeta(100, 2, 2) #Generate suitability values
+suit<-rbeta(100, 2, 2) # Generate suitability values
 random<-runif(100)
-sp<-ifelse(random < suit, 1, 0) #Generate presence-absence data
+sp<-ifelse(random < suit, 1, 0) # Generate presence-absence data
 result<-AUCuniform(cbind(suit, sp), plot = TRUE, plot.adds = TRUE)
-result$uAUC.95CI[2] #Get the uAUC
+result$uAUC.95CI[2] # Get the uAUC
 }
 \references{
 Bamber, D. (1975). The Area above the Ordinal Dominance Graph and

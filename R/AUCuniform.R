@@ -41,11 +41,11 @@
 #' @return \code{uSe.95CI}: a numeric vector with the sample (\emph{uSe*}) 
 #' quantiles corresponding to the probabilities 0.025, 0.5 and 0.975.
 #' @examples
-#' suit<-rbeta(100, 2, 2) #Generate suitability values
+#' suit<-rbeta(100, 2, 2) # Generate suitability values
 #' random<-runif(100)
-#' sp<-ifelse(random < suit, 1, 0) #Generate presence-absence data
+#' sp<-ifelse(random < suit, 1, 0) # Generate presence-absence data
 #' result<-AUCuniform(cbind(suit, sp), plot = TRUE, plot.adds = TRUE)
-#' result$uAUC.95CI[2] #Get the uAUC
+#' result$uAUC.95CI[2] # Get the uAUC
 #' @encoding UTF-8
 #' @references Bamber, D. (1975). The Area above the Ordinal Dominance Graph and
 #'     the Area below the Receiver Operating Characteristic Graph.
@@ -67,15 +67,14 @@
 AUCuniform <- function(mat, rep = 100, by = 0.1, deleteBins = NULL, plot = FALSE, plot.adds = FALSE) {
     # Non-uniform:
     Wilcox <- wilcox.test(mat[, 1] ~ mat[, 2], exact = FALSE)
-    AUC <- 1 - (Wilcox["statistic"]$statistic/((length(mat[, 2]) - (sum(mat[, 2]))) * sum(mat[, 
-        2])))
+    AUC <- 1 - (Wilcox["statistic"]$statistic/((length(mat[, 2]) - (sum(mat[, 2]))) * sum(mat[, 2])))
     cosa <- ROCR::prediction(mat[, 1], mat[, 2])
     temporal <- ROCR::performance(cosa, "sens", "spec")
     diferencia <- abs(temporal@x.values[[1]] - temporal@y.values[[1]])
     SE <- (temporal@y.values[[1]][which.min(diferencia)] + temporal@x.values[[1]][which.min(diferencia)])/2
     if (plot == TRUE) {
-        plot(1 - temporal@x.values[[1]], temporal@y.values[[1]], pch = 16, xlab = "false positive rate", 
-            ylab = "sensitivity", main = "ROC curve", yaxt = "n", cex.lab = 1.3, cex.axis = 1)
+        plot(1 - temporal@x.values[[1]], temporal@y.values[[1]], pch = 16, xlab = "false positive rate", ylab = "sensitivity",
+            main = "ROC curve", yaxt = "n", cex.lab = 1.3, cex.axis = 1)
         axis(side = 2, las = 2, mgp = c(3, 0.75, 0))
         abline(a = 0, b = 1, lty = 2)
         if (plot.adds == TRUE) {
@@ -87,11 +86,11 @@ AUCuniform <- function(mat, rep = 100, by = 0.1, deleteBins = NULL, plot = FALSE
     bins <- seq(0, 1, by)
     intervals <- cut(mat[, 1], bins, include.lowest = T, right = F)
     probs <- table(intervals)[intervals]
-    if (dim(mat)[1] < 30) 
+    if (dim(mat)[1] < 30)
         warning("Your sample size is low, results must be interpreted with caution.")
-    if (sum(table(intervals) < 15) > 0) 
+    if (sum(table(intervals) < 15) > 0)
         warning("At least one sutability interval has n < 15, results must be interpreted with caution.")
-    if (sum(table(intervals) == 0) > 0) 
+    if (sum(table(intervals) == 0) > 0)
         warning(paste("There are", sum(table(intervals) == 0), "interval(s) with zero data, results must be interpreted with caution."))
     if (is.null(deleteBins) == FALSE) {
         toDelete <- levels(intervals)[deleteBins]
@@ -107,15 +106,14 @@ AUCuniform <- function(mat, rep = 100, by = 0.1, deleteBins = NULL, plot = FALSE
         HS[, i] <- newdata[, 1]
         SP[, i] <- newdata[, 2]
         Wilcox <- wilcox.test(newdata[, 1] ~ newdata[, 2], exact = FALSE)
-        uAUC <- c(uAUC, 1 - (Wilcox["statistic"]$statistic/((dim(newdata)[1] - (sum(newdata[, 
-            2]))) * sum(newdata[, 2])))[[1]])
+        uAUC <- c(uAUC, 1 - (Wilcox["statistic"]$statistic/((dim(newdata)[1] - (sum(newdata[, 2]))) * sum(newdata[,
+            2])))[[1]])
         cosa <- ROCR::prediction(newdata[, 1], newdata[, 2])
         temporal <- ROCR::performance(cosa, "sens", "spec")
         diferencia <- abs(temporal@x.values[[1]] - temporal@y.values[[1]])
         uSE <- c(uSE, (temporal@y.values[[1]][which.min(diferencia)] + temporal@x.values[[1]][which.min(diferencia)])/2)
     }
-    
-    return(list(AUC = AUC[[1]], Se = SE, bins = table(intervals), suit.sim = HS, sp.sim = SP, 
-        uAUC = uAUC, uAUC.95CI = quantile(uAUC, c(0.025, 0.5, 0.975)), uSe = uSE, uSe.95CI = quantile(uSE, 
-            c(0.025, 0.5, 0.975))))
+
+    return(list(AUC = AUC[[1]], Se = SE, bins = table(intervals), suit.sim = HS, sp.sim = SP, uAUC = uAUC, uAUC.95CI = quantile(uAUC,
+        c(0.025, 0.5, 0.975)), uSe = uSE, uSe.95CI = quantile(uSE, c(0.025, 0.5, 0.975))))
 }

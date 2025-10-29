@@ -79,19 +79,18 @@
 #' @importFrom graphics points
 #' @export
 
-AUCuniform_trap <- function(mat, by = 0.1, deleteBins = NULL, w = NULL,
-    plot = FALSE, plot.compare = FALSE, plot.adds = FALSE) {
+AUCuniform_trap <- function(mat, by = 0.1, deleteBins = NULL, w = NULL, plot = FALSE, plot.compare = FALSE, plot.adds = FALSE) {
+    .Deprecated("AUCuniform.2")
     # Non-uniform:
     mat.ord <- mat[order(mat[, 1], decreasing = TRUE), ]
-    true.pos <- cumsum(mat.ord[, 2]) / sum(mat.ord[, 2])
-    false.pos <- cumsum(1 - mat.ord[, 2]) / sum((1 - mat.ord[, 2]))
+    true.pos <- cumsum(mat.ord[, 2])/sum(mat.ord[, 2])
+    false.pos <- cumsum(1 - mat.ord[, 2])/sum((1 - mat.ord[, 2]))
     auc.trap <- sum(diff(c(0, false.pos)) * true.pos)
     diferencia <- abs(true.pos - (1 - false.pos))
-    se.trap <- (true.pos[which.min(diferencia)] + (1 - false.pos)[which.min(diferencia)]) / 2
+    se.trap <- (true.pos[which.min(diferencia)] + (1 - false.pos)[which.min(diferencia)])/2
     if (plot == TRUE) {
-        plot(c(0,false.pos), c(0,true.pos), pch = 16, xlab = "false positive rate",
-            ylab = "sensitivity", main = "ROC curve", yaxt = "n", cex.lab = 1.3,
-            cex.axis = 1, col="gray")
+        plot(c(0, false.pos), c(0, true.pos), pch = 16, xlab = "false positive rate", ylab = "sensitivity", main = "ROC curve",
+            yaxt = "n", cex.lab = 1.3, cex.axis = 1, col = "gray")
         axis(side = 2, las = 2, mgp = c(3, 0.75, 0))
         abline(a = 0, b = 1, lty = 2)
     }
@@ -99,7 +98,7 @@ AUCuniform_trap <- function(mat, by = 0.1, deleteBins = NULL, w = NULL,
     if (is.null(w) == TRUE) {
         bins <- seq(0, 1, by)
         intervals <- cut(mat[, 1], bins, include.lowest = TRUE, right = FALSE)
-        probs <- as.vector(1 / table(intervals)[intervals])
+        probs <- as.vector(1/table(intervals)[intervals])
         probs.ord <- probs[order(mat[, 1], decreasing = TRUE)]
         if (dim(mat)[1] < 30)
             warning("Your sample size is low, results must be interpreted with caution.")
@@ -114,28 +113,27 @@ AUCuniform_trap <- function(mat, by = 0.1, deleteBins = NULL, w = NULL,
             mat.ord <- mat[order(mat[, 1], decreasing = TRUE), ]
             probs.ord <- probs[order(mat[, 1], decreasing = TRUE)]
         }
-        wauc <- sum(diff(c(0, cumsum((1 - mat.ord[, 2]) * probs.ord) / sum((1 - mat.ord[, 2]) *
-            probs.ord))) * (cumsum(mat.ord[, 2] * probs.ord) / sum(mat.ord[, 2] * probs.ord)))
-        diferencia <- abs((cumsum(mat.ord[, 2] * probs.ord) / sum(mat.ord[, 2] * probs.ord)) -
-            (1 - (cumsum((1 - mat.ord[, 2]) * probs.ord) / sum((1 - mat.ord[, 2]) * probs.ord))))
-        wse <- ((cumsum(mat.ord[, 2] * probs.ord) / sum(mat.ord[, 2] * probs.ord))[which.min(diferencia)] +
-            (1 - (cumsum((1 - mat.ord[, 2]) * probs.ord) / sum((1 - mat.ord[, 2]) * probs.ord))))[which.min(diferencia)] / 2
+        wauc <- sum(diff(c(0, cumsum((1 - mat.ord[, 2]) * probs.ord)/sum((1 - mat.ord[, 2]) * probs.ord))) * (cumsum(mat.ord[,
+            2] * probs.ord)/sum(mat.ord[, 2] * probs.ord)))
+        diferencia <- abs((cumsum(mat.ord[, 2] * probs.ord)/sum(mat.ord[, 2] * probs.ord)) - (1 - (cumsum((1 -
+            mat.ord[, 2]) * probs.ord)/sum((1 - mat.ord[, 2]) * probs.ord))))
+        wse <- ((cumsum(mat.ord[, 2] * probs.ord)/sum(mat.ord[, 2] * probs.ord))[which.min(diferencia)] + (1 -
+            (cumsum((1 - mat.ord[, 2]) * probs.ord)/sum((1 - mat.ord[, 2]) * probs.ord))))[which.min(diferencia)]/2
     }
     # Other weights for cases
     if (is.null(w) == FALSE) {
         if (length(w) != dim(mat)[1])
             warning("The number of cases does not match the length of w. The weighted statistics are not calculated and the weighted ROC curve is not plotted.")
         probs.ord <- w[order(mat[, 1], decreasing = TRUE)]
-        wauc <- sum(diff(c(0, cumsum((1 - mat.ord[, 2]) * probs.ord) / sum((1 - mat.ord[, 2]) *
-            probs.ord))) * (cumsum(mat.ord[, 2] * probs.ord) / sum(mat.ord[, 2] * probs.ord)))
-        wse <- ((cumsum(mat.ord[, 2] * probs.ord) / sum(mat.ord[, 2] * probs.ord))[which.min(diferencia)] +
-            (1 - (cumsum((1 - mat.ord[, 2]) * probs.ord) / sum((1 - mat.ord[, 2]) * probs.ord))))[which.min(diferencia)] / 2
+        wauc <- sum(diff(c(0, cumsum((1 - mat.ord[, 2]) * probs.ord)/sum((1 - mat.ord[, 2]) * probs.ord))) * (cumsum(mat.ord[,
+            2] * probs.ord)/sum(mat.ord[, 2] * probs.ord)))
+        wse <- ((cumsum(mat.ord[, 2] * probs.ord)/sum(mat.ord[, 2] * probs.ord))[which.min(diferencia)] + (1 -
+            (cumsum((1 - mat.ord[, 2]) * probs.ord)/sum((1 - mat.ord[, 2]) * probs.ord))))[which.min(diferencia)]/2
     }
     # Plots
     if (plot.compare == TRUE) {
-        lines(c(0,(cumsum((1 - mat.ord[, 2]) * probs.ord) / sum((1 - mat.ord[, 2]) * probs.ord))),
-            c(0,(cumsum(mat.ord[, 2] * probs.ord) / sum(mat.ord[, 2] * probs.ord))),
-            pch = 16, col = "black")
+        lines(c(0, (cumsum((1 - mat.ord[, 2]) * probs.ord)/sum((1 - mat.ord[, 2]) * probs.ord))), c(0, (cumsum(mat.ord[,
+            2] * probs.ord)/sum(mat.ord[, 2] * probs.ord))), pch = 16, col = "black")
     }
     if (plot.adds == TRUE) {
         abline(a = 1, b = -1, col = "darkgrey", lty = 2)
@@ -144,8 +142,7 @@ AUCuniform_trap <- function(mat, by = 0.1, deleteBins = NULL, w = NULL,
     }
     # Get results
     if (is.null(w) == TRUE) {
-        return(list(AUC = auc.trap, Se = se.trap, bins = table(intervals),
-            uAUC = wauc, uSe = wse))
+        return(list(AUC = auc.trap, Se = se.trap, bins = table(intervals), uAUC = wauc, uSe = wse))
     }
     if (is.null(w) == FALSE) {
         return(list(AUC = auc.trap, Se = se.trap, wAUC = wauc, wSe = wse))

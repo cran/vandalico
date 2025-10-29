@@ -33,9 +33,9 @@ is greater, equal to, or less than the \emph{uAUC} (or \emph{uSe*}) (see
 Jiménez-Valverde 2022).
 }
 \examples{
-suit<-rbeta(100, 2, 2) #Generate suitability values
+suit<-rbeta(100, 2, 2) # Generate suitability values
 random<-runif(100)
-sp<-ifelse(random < suit, 1 , 0) #Generate presence-absence data
+sp<-ifelse(random < suit, 1 , 0) # Generate presence-absence data
 HSgraph(cbind(suit, sp), breaks = 20, hist.total = TRUE)
 }
 \references{

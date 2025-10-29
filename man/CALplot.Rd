@@ -29,9 +29,9 @@ al. 2013). This way, by plotting the calibration graph before running
 or \emph{uSe*} can be expected to be.
 }
 \examples{
-suit<-rbeta(100, 2, 2) #Generate suitability values
+suit<-rbeta(100, 2, 2) # Generate suitability values
 random<-runif(100)
-sp<-ifelse(random < suit,1 , 0) #Generate presence-absence data
+sp<-ifelse(random < suit,1 , 0) # Generate presence-absence data
 CALplot(cbind(suit, sp))
 }
 \references{
