@@ -53,6 +53,7 @@
 #' @return \code{wSe}: the weighted \emph{Se*} estimated with the vector
 #' \code{w}
 #' @examples
+#' \donttest{
 #' suit<-rbeta(100, 2, 2) #Generate suitability values
 #' random<-runif(100)
 #' sp<-ifelse(random < suit, 1, 0) #Generate presence-absence data
@@ -61,6 +62,7 @@
 #' result$uAUC #Get the uAUC. Note how it is closer to the reference value of
 #'             #0.83 since the suitability values are simulated to be
 #'             #well-calibrated (see Jimenez-Valverde 2022).
+#'             }
 #' @encoding UTF-8
 #' @references Hanley, J. A. & McNeil, B. J. (1982). The Meaning and Use of the
 #'     Area under a Receiver Operating Characteristic (ROC) Curve.
@@ -77,6 +79,7 @@
 #' @importFrom graphics abline
 #' @importFrom graphics axis
 #' @importFrom graphics points
+#' @keywords internal
 #' @export
 
 AUCuniform_trap <- function(mat, by = 0.1, deleteBins = NULL, w = NULL, plot = FALSE, plot.compare = FALSE, plot.adds = FALSE) {

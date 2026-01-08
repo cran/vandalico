@@ -89,6 +89,7 @@ trapezoidal rule, which is equivalent to the Wilcoxon-based estimation
 in \code{AUCuniform}.
 }
 \examples{
+\donttest{
 suit<-rbeta(100, 2, 2) #Generate suitability values
 random<-runif(100)
 sp<-ifelse(random < suit, 1, 0) #Generate presence-absence data
@@ -97,6 +98,7 @@ result$AUC #Get the AUC
 result$uAUC #Get the uAUC. Note how it is closer to the reference value of
             #0.83 since the suitability values are simulated to be
             #well-calibrated (see Jimenez-Valverde 2022).
+            }
 }
 \references{
 Hanley, J. A. & McNeil, B. J. (1982). The Meaning and Use of the
@@ -111,3 +113,4 @@ Hanley, J. A. & McNeil, B. J. (1982). The Meaning and Use of the
     case-by-case weighting evaluation in species distribution models. 
     \emph{In preparation}.
 }
+\keyword{internal}

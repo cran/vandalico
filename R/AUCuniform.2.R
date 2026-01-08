@@ -5,8 +5,8 @@
 #' uniform \emph{Se*} (\emph{uSe*}) using the direct weighted trapezoidal
 #' estimation method (Jiménez-Valverde 2025), instead of the stratified 
 #' bootstrapping with inverse probability weighting method implemented in 
-#' \code{AUCuniform} and originally proposed by Jiménez-Valverde (2022). Uniform 
-#' statistics are design to account for the representativeness effect 
+#' \code{\link{AUCuniform}} and originally proposed by Jiménez-Valverde (2022). 
+#' Uniform statistics are design to account for the representativeness effect 
 #' (Jiménez-Valverde 2022). This new method reduces bias and improves the 
 #' coverage of confidence intervals relative to the original proposal. 
 #' Additionally, the weight vector associated to each case can be customized. 
@@ -144,7 +144,7 @@
 #'
 #'     Jiménez-Valverde, A. (2025). Refining uniform discrimination metrics: 
 #'     towards a case-by-case weighting evaluation in species distribution 
-#'     models with presence-absence data. \emph{Under review}. 
+#'     models with presence-absence data. \emph{Ecol. Evol.}, 15, e72573. 
 #' @importFrom graphics plot
 #' @importFrom graphics abline
 #' @importFrom graphics axis

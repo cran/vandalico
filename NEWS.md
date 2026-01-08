@@ -1,3 +1,13 @@
+## [0.2.1] - 2026-01-08
+
+### Documentation
+
+- Cleaned documentation: deprecated function `AUCuniform_trap()` is no longer indexed or shown in the PDF manual. The function is kept for backward compatibility.
+
+- Updated the reference for Jiménez-Valverde (2025) in `AUCuniform.2.Rd` to include the journal name, volume number and article number.
+
+- Clarified documentation of `AUCuniform()`: added note that it is retained for completeness and reproducibility, while `AUCuniform.2()` is recommended for most applications.
+
 ## [0.2.0] - 2025-10-24
 
 ### Added

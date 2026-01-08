@@ -63,7 +63,9 @@ quantiles corresponding to the probabilities 0.025, 0.5 and 0.975.
 }
 \description{
 This function computes the uniform \emph{AUC} (\emph{uAUC}) and
-uniform \emph{Se*} (\emph{uSe*}) following Jiménez-Valverde (2022).
+uniform \emph{Se*} (\emph{uSe*}) following Jiménez-Valverde (2022). A revised 
+and improved formulation is available in \code{\link{AUCuniform.2}}, which 
+users are encouraged to consider for most applications.
 }
 \details{
 This function performs the stratified weighted bootstrap to

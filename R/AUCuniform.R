@@ -1,7 +1,9 @@
 #' @title Calculates the uniform \emph{AUC} and uniform \emph{Se*}
 #'
 #' @description This function computes the uniform \emph{AUC} (\emph{uAUC}) and
-#' uniform \emph{Se*} (\emph{uSe*}) following Jiménez-Valverde (2022).
+#' uniform \emph{Se*} (\emph{uSe*}) following Jiménez-Valverde (2022). A revised 
+#' and improved formulation is available in \code{\link{AUCuniform.2}}, which 
+#' users are encouraged to consider for most applications.
 #' @param mat A matrix with two columns. The first column must contain the
 #' suitability values (i.e., the classification rule); the second column must
 #' contain the presences and absences.
