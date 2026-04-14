@@ -3,7 +3,8 @@
 #' @description This function computes the uniform \emph{AUC} (\emph{uAUC}) and
 #' uniform \emph{Se*} (\emph{uSe*}) following Jiménez-Valverde (2022). A revised 
 #' and improved formulation is available in \code{\link{AUCuniform.2}}, which 
-#' users are encouraged to consider for most applications.
+#' users are encouraged to consider for most applications. \code{\link{AUCuniform}}
+#' is retained for completeness and reproducibility.
 #' @param mat A matrix with two columns. The first column must contain the
 #' suitability values (i.e., the classification rule); the second column must
 #' contain the presences and absences.
@@ -19,7 +20,7 @@
 #' the point of equivalence are added to the observed ROC plot.
 #' @details This function performs the stratified weighted bootstrap to
 #' calculate the uniform \emph{AUC} (\emph{uAUC}) and uniform \emph{Se*}
-#' (\emph{uSe*}) as suggested in Jiménez-Valverde (2022).  A warning message
+#' (\emph{uSe*}) as suggested in Jiménez-Valverde (2022). A warning message
 #' will be shown if the sample size of any bin is zero. Another warning message
 #' will be shown if the sample size of any bin is lower than 15. In such case,
 #' trimming should be considered. The \emph{AUC} (non-uniform) is estimated

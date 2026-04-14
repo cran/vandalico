@@ -17,8 +17,8 @@ AUCuniform.2(
 )
 }
 \arguments{
-\item{mat}{A matrix with two columns. The first column must contain the
-the classification rule (e.g., the suitability values); the second column 
+\item{mat}{A matrix with two columns. The first column must contain the 
+classification rule (e.g., the suitability values); the second column 
 must contain the presences and absences.}
 
 \item{by}{The size of the intervals used to divide the classification rule 

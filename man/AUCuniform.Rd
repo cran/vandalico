@@ -65,12 +65,13 @@ quantiles corresponding to the probabilities 0.025, 0.5 and 0.975.
 This function computes the uniform \emph{AUC} (\emph{uAUC}) and
 uniform \emph{Se*} (\emph{uSe*}) following Jiménez-Valverde (2022). A revised 
 and improved formulation is available in \code{\link{AUCuniform.2}}, which 
-users are encouraged to consider for most applications.
+users are encouraged to consider for most applications. \code{\link{AUCuniform}}
+is retained for completeness and reproducibility.
 }
 \details{
 This function performs the stratified weighted bootstrap to
 calculate the uniform \emph{AUC} (\emph{uAUC}) and uniform \emph{Se*}
-(\emph{uSe*}) as suggested in Jiménez-Valverde (2022).  A warning message
+(\emph{uSe*}) as suggested in Jiménez-Valverde (2022). A warning message
 will be shown if the sample size of any bin is zero. Another warning message
 will be shown if the sample size of any bin is lower than 15. In such case,
 trimming should be considered. The \emph{AUC} (non-uniform) is estimated

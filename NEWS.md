@@ -1,3 +1,13 @@
+## [0.2.2] - 2026-04-14
+
+### Fixed
+
+- Fix bug in function `AUCuniform.2` when ties occur at maximum value of the classification rule.
+
+### Documentation
+
+- Minor improvements and typo fixes.
+
 ## [0.2.1] - 2026-01-08
 
 ### Documentation

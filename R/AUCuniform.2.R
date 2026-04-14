@@ -10,8 +10,8 @@
 #' (Jiménez-Valverde 2022). This new method reduces bias and improves the 
 #' coverage of confidence intervals relative to the original proposal. 
 #' Additionally, the weight vector associated to each case can be customized. 
-#' @param mat A matrix with two columns. The first column must contain the
-#' the classification rule (e.g., the suitability values); the second column 
+#' @param mat A matrix with two columns. The first column must contain the 
+#' classification rule (e.g., the suitability values); the second column 
 #' must contain the presences and absences.
 #' @param by The size of the intervals used to divide the classification rule 
 #' (i.e., bins width). By default, \code{by} = 0.1. This argument is only used 
@@ -180,6 +180,8 @@ AUCuniform.2 <- function(mat, by = 0.1, deleteBins = NULL, w = NULL, plot = FALS
         true.pos <- c(true.pos, tp/n.pos)
         false.pos <- c(false.pos, fp/n.neg)
     }
+    true.pos <- c(0, true.pos)
+    false.pos <- c(0, false.pos)
     auc.trap <- sum(diff(false.pos) * (head(true.pos, -1) + tail(true.pos, -1))/2)
     diferencia <- abs(true.pos - (1 - false.pos))
     se.trap <- (true.pos[which.min(diferencia)] + (1 - false.pos)[which.min(diferencia)])/2
@@ -203,6 +205,8 @@ AUCuniform.2 <- function(mat, by = 0.1, deleteBins = NULL, w = NULL, plot = FALS
             true.pos.w <- c(true.pos.w, tp.w/n.pos.w)
             false.pos.w <- c(false.pos.w, fp.w/n.neg.w)
         }
+        true.pos.w <- c(0, true.pos.w)
+        false.pos.w <- c(0, false.pos.w)
         w.auc <- sum(diff(false.pos.w) * (head(true.pos.w, -1) + tail(true.pos.w, -1))/2)
         diferencia.w <- abs(true.pos.w - (1 - false.pos.w))
         w.se <- (true.pos.w[which.min(diferencia.w)] + (1 - false.pos.w)[which.min(diferencia.w)])/2
@@ -247,19 +251,21 @@ AUCuniform.2 <- function(mat, by = 0.1, deleteBins = NULL, w = NULL, plot = FALS
             true.pos.w <- c(true.pos.w, tp.w/n.pos.w)
             false.pos.w <- c(false.pos.w, fp.w/n.neg.w)
         }
+        true.pos.w <- c(0, true.pos.w)
+        false.pos.w <- c(0, false.pos.w)
         w.auc <- sum(diff(false.pos.w) * (head(true.pos.w, -1) + tail(true.pos.w, -1))/2)
         diferencia.w <- abs(true.pos.w - (1 - false.pos.w))
         w.se <- (true.pos.w[which.min(diferencia.w)] + (1 - false.pos.w)[which.min(diferencia.w)])/2
     }
 
     if (plot == TRUE) {
-        plot(c(0, false.pos), c(0, true.pos), pch = 16, xlab = "false positive rate", ylab = "sensitivity", main = "ROC curve",
+        plot(false.pos, true.pos, pch = 16, xlab = "false positive rate", ylab = "sensitivity", main = "ROC curve",
             yaxt = "n", cex.lab = 1.3, cex.axis = 1, col = "gray")
         axis(side = 2, las = 2, mgp = c(3, 0.75, 0))
         abline(a = 0, b = 1, lty = 2)
     }
     if (plot.compare == TRUE) {
-        lines(c(0, false.pos.w, 1), c(0, true.pos.w, 1), pch = 16, col = "black")
+        lines(c(false.pos.w, 1), c(true.pos.w, 1), pch = 16, col = "black")
     }
     if (plot.adds == TRUE) {
         abline(a = 1, b = -1, col = "darkgrey", lty = 2)
